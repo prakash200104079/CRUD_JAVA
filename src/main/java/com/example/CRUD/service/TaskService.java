@@ -16,11 +16,13 @@ public class TaskService {
 
     //CRUD CREATE, READ, UPDATE, DELETE
 
+    // Create a new task and assign a unique ID
     public Task addTask(Task task) {
         task.setTaskId(UUID.randomUUID().toString().split("-")[0]);
         return repository.save(task);
     }
 
+    // Retrieve all tasks
     public List<Task> findAllTasks() {
         try {
             return repository.findAll();
@@ -30,7 +32,7 @@ public class TaskService {
             throw new RuntimeException("Error retrieving tasks", e);
         }
     }
-
+    // Retrieve a task by its ID
     public Task getTaskByTaskId(String taskId) {
         try {
             return repository.findById(taskId).orElseThrow(() -> new RuntimeException("Task not found"));
@@ -40,6 +42,7 @@ public class TaskService {
         }
     }
 
+    // Retrieve tasks by their severity level
     public List<Task> getTaskBySeverity(int severity) {
         try {
             return repository.findBySeverity(severity);
@@ -49,6 +52,7 @@ public class TaskService {
         }
     }
 
+    // Retrieve tasks assigned to a specific person
     public List<Task> getTaskByAssignee(String assignee) {
         try {
             return repository.getTasksByAssignee(assignee);
@@ -58,6 +62,7 @@ public class TaskService {
         }
     }
 
+    // Update an existing task
     public Task updateTask(Task taskRequest) {
         try {
             Task existingTask = repository.findById(taskRequest.getTaskId()).orElseThrow(() -> new RuntimeException("Task not found"));
@@ -72,6 +77,7 @@ public class TaskService {
         }
     }
 
+    // Delete a task by its ID
     public String deleteTask(String taskId) {
         try {
             repository.deleteById(taskId);

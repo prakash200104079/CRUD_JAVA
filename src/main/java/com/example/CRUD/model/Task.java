@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+// Annotates the class as a MongoDB document
 @Document(collection = "tasks")
 @Data
 @AllArgsConstructor
